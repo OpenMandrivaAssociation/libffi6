@@ -50,6 +50,7 @@ layer of a fully featured foreign function interface. A layer must
 exist above `libffi' that handles type conversions for values passed
 between the two languages.
 
+%if "%{_lib}" != "lib"
 %package -n	%{libname}
 Summary:	A portable foreign function interface library
 Group:		System/Libraries
@@ -80,7 +81,7 @@ written in one language to call code written in another language. The
 layer of a fully featured foreign function interface. A layer must
 exist above `libffi' that handles type conversions for values passed
 between the two languages.
-
+%endif
 
 %package -n	%{devname}
 Summary:	Development files for %{name}
@@ -121,7 +122,11 @@ rm -rf %{buildroot}%{_libdir}/pkgconfig \
 	%{buildroot}%{_infodir} \
 	%{buildroot}%{_libdir}/*.{a,so}
 
+%if "%{_lib}" == "lib"
+%files
+%else
 %files -n %{libname}
+%endif
 %{_libdir}/libffi.so.%{major}*
 
 %if 0
