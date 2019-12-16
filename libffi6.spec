@@ -7,13 +7,13 @@
 %global optflags %optflags -O3
 
 Summary:	A portable foreign function interface library
-Name:		libffi
+Name:		libffi6
 Version:	3.2.1
-Release:	11
+Release:	12
 Group:		System/Libraries
 License:	BSD
-Url:		http://sourceware.org/%{name}
-Source0:	ftp://sourceware.org/pub/%{name}/%{name}-%{version}.tar.gz
+Url:		http://sourceware.org/libffi
+Source0:	ftp://sourceware.org/pub/%{name}/libffi-%{version}.tar.gz
 Patch0:		ffi-3.2.1-sysv.S.patch
 Patch1:		libffi-3.2.1-o-tmpfile-eacces.patch
 Patch2:		libffi-3.1-fix-include-path.patch
@@ -106,7 +106,7 @@ This package contains static libraries for developing
 applications that use %{name}.
 
 %prep
-%autosetup -p1
+%autosetup -p1 -n libffi-%{version}
 autoreconf -fiv
 
 %build
@@ -115,10 +115,16 @@ autoreconf -fiv
 
 %install
 %make_install
+rm -rf %{buildroot}%{_libdir}/pkgconfig \
+	%{buildroot}%{_includedir} \
+	%{buildroot}%{_mandir} \
+	%{buildroot}%{_infodir} \
+	%{buildroot}%{_libdir}/*.{a,so}
 
 %files -n %{libname}
 %{_libdir}/libffi.so.%{major}*
 
+%if 0
 %files -n %{devname}
 %doc LICENSE README
 %{_libdir}/pkgconfig/libffi.pc
@@ -129,3 +135,4 @@ autoreconf -fiv
 
 %files -n %{staticname}
 %{_libdir}/*.a
+%endif
