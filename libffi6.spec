@@ -12,7 +12,7 @@ Version:	3.2.1
 Release:	13
 Group:		System/Libraries
 License:	BSD
-Url:		http://sourceware.org/libffi
+Url:		https://sourceware.org/libffi
 Source0:	ftp://sourceware.org/pub/%{name}/libffi-%{version}.tar.gz
 Patch0:		ffi-3.2.1-sysv.S.patch
 Patch1:		libffi-3.2.1-o-tmpfile-eacces.patch
